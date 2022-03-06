@@ -545,7 +545,7 @@
                     {x:0,y:1,name:'b'},
                     {x:1,y:2,name:'c.bin'},
                 ]
-                let icons = await fetch('./icons').then(r=>r.json());
+                let icons = await fetch('./icons.json').then(r=>r.json());
                 let fileIcons = icons.file;
 
                 function displayfileIcon(x,y,name) {
