@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <title>3D renderer test</title>
+    </head>
+
+    <body>
+        
+        <canvas width="100%" height="100%" id="canvas" style="background-color:black;position:absolute;margin:0;padding:0;top:0;left:0;"></canvas>
+
+        <script>
+
+            var canvas = document.querySelector('canvas');
+            var ctx = canvas.getContext('2d');
+
+            function clamp(value,a,b) {
+                return Math.max(Math.min(value,Math.max(a,b)),Math.min(a,b));
+            }
+
+            function vector(a,b,c) {
+
+                let x,y,z;
+
+                if (vector.isVector(a))
+                    ({x,y,z} = a);
+                else {
+                    x = a;
+                    y = b;
+                    z = c;
+                }
+
+                return {
+                    x,y,z,
+
+                    add (a,b,c) {
+                        let x,y,z;
+                        if (vector.isVector(a))
+                            ({x,y,z} = a);
+                        else if (a!=undefined && b==undefined&&c==undefined) {
+                            x=y=z = a;
+                        } else {
+                            x = a;
+                            y = b;
+                            z = c;
+                        }
+                        return vector(this.x+x,this.y+y,this.z+z);
+                    },
+                    sub (a,b,c) {
+                        let x,y,z;
+                        if (vector.isVector(a))
+                            ({x,y,z} = a);
+                        else if (a!=undefined && b==undefined&&c==undefined) {
+                            x=y=z = a;
+                        } else {
+                            x = a;
+                            y = b;
+                            z = c;
+                        }
+                        return vector(this.x-x,this.y-y,this.z-z);
+                    },
+                    mul (a,b,c) {
+                        let x,y,z;
+                        if (vector.isVector(a))
+                            ({x,y,z} = a);
+                        else if (a!=undefined && b==undefined&&c==undefined) {
+                            x=y=z = a;
+                        } else {
+                            x = a;
+                            y = b;
+                            z = c;
+                        }
+                        return vector(this.x*x,this.y*y,this.z*z);
+                    },
+                    div (a,b,c) {
+                        let x,y,z;
+                        if (vector.isVector(a))
+                            ({x,y,z} = a);
+                        else if (a!=undefined && b==undefined&&c==undefined) {
+                            x=y=z = a;
+                        } else {
+                            x = a;
+                            y = b;
+                            z = c;
+                        }
+                        return vector(this.x/x,this.y/y,this.z/z);
+                    },
+
+                    unit () {
+                        return vector(
+                            this.x/this.magnitude(),
+                            this.y/this.magnitude(),
+                            this.z/this.magnitude()
+                        );
+                    },
+
+                    distanceTo (a,b,c) {
+                        let x,y,z;
+                        if (vector.isVector(a))
+                            ({x,y,z} = a);
+                        else if (a!=undefined && b==undefined&&c==undefined) {
+                            x=y=z = a;
+                        } else {
+                            x = a;
+                            y = b;
+                            z = c;
+                        }
+                        return ( (this.x-x)**2+(this.y-y)**2+(this.z-z)**2 ) ** 0.5;
+                    },
+                    magnitude () {
+                        return this.distanceTo(0,0,0);
+                    }
+                }
+
+            }
+
+            vector.isVector = function(obj) {
+                return (
+                    obj.x!=undefined &&
+                    obj.y!=undefined &&
+                    obj.z!=undefined
+                )
+            }
+
+            vector.lerp = function(start,end,i) {
+                return start.mul(1-i).add(end.mul(i))
+            }
+
+            var v = vector;
+
+            var graphics = {
+
+                width: canvas.width, height:canvas.height,
+                drawers: [],
+
+                addDrawer (fn) {
+                    this.drawers.push(fn);
+                },
+
+                update (params = []) {
+                    this.width = canvas.width;
+                    this.height = canvas.height;
+
+                    for (let d of this.drawers)
+                        if (d(this, params)) break;
+                },
+
+                draw (params = []) {
+                    /*let str = ''
+                    for (let y in this.canvas.pixels) for (let x in this.canvas.pixels[y]) {
+                        let px = this.canvas.pixels[y][x];
+
+                        str += `\x1b[${+y+1};${+x+1}H`;
+                        str += `\x1b[38;2;${(px.fg??Color.rgb(255,255,255)).array().join(';')}m`;
+                        str += `\x1b[48;2;${(px.bg??Color.rgb(0,0,0)).array().join(';')}m`;
+                        str += `${px.c??' '}`;
+                    }
+                    process.stdout.write(str);*/
+                },
+
+                udraw (updateParams = [], drawParams = []) {
+                    canvas.width  = window.innerWidth;
+                    canvas.height = window.innerHeight;
+                    this.width = canvas.width;
+                    this.height = canvas.height;
+                    this.update(updateParams);
+                    this.draw(drawParams);
+                },
+
+                set (x, y, color) {
+                    ctx.fillStyle = color;
+                    ctx.fillRect(x,y,1,1);
+                },
+
+                clear () {
+                    ctx.clearRect(0,0,500,500);
+                },
+                
+                line (a, b, width, color) {
+                    ctx.beginPath();
+                    ctx.lineWidth = 2;
+                    ctx.strokeStyle = color;
+                    ctx.moveTo(a.x,a.y);
+                    ctx.lineTo(b.x,b.y);
+                    ctx.stroke();
+                    ctx.closePath();
+                },
+
+                circle (p,radius,color) {
+                    ctx.fillStyle = color;
+                    ctx.beginPath();
+                    ctx.arc(p.x,p.y,radius,0,Math.PI*2);
+                    ctx.fill();
+                    ctx.closePath();
+                },
+
+                shape (points,color) {
+                    ctx.fillStyle = color;
+                    ctx.moveTo(points[0].x,points[0].y);
+                    ctx.beginPath();
+                    for (let pt of points) {
+                        ctx.lineTo(pt.x,pt.y);
+                    }
+                    ctx.lineTo(points[0].x,points[0].y);
+                    ctx.closePath();
+                    ctx.fill();
+                }
+
+            }
+            var g = graphics;
+
+
+            /* main */
+
+
+            var focal_length = 1;
+            var camera_pos = v(0,0,0);
+
+            var render_distance = 200;
+
+            let rtx = 0;
+            let rty = 0;
+            let rtz = 0;
+            let frame = 0;
+            let _rd = render_distance;
+
+            var polygons = [],
+                vertex = [];
+
+            /*let vertex = [
+                v(10,10,1),
+                v(-10,10,1),
+                v(10,-10,1),
+                v(-10,-10,1),
+            
+                v(10,10,10),
+                v(-10,10,10),
+                v(10,-10,10),
+                v(-10,-10,10),
+            ]*/
+
+            /*let vertex = [
+                v(10,10,10),
+                v(-10,10,10),
+                v(10,-10,10),
+                v(-10,-10,10),
+            
+                v(10,10,-10),
+                v(-10,10,-10),
+                v(10,-10,-10),
+                v(-10,-10,-10),
+            ]
+
+            let lines = [
+                [0,1],
+                [0,4],
+                [0,2],
+            
+                [1,5],
+                [1,3],
+            
+                [2,6],
+                [2,3],
+            
+                [3,7],
+                
+                [4,5],
+                [4,6],
+                
+                [5,7],
+            
+                [7,6],
+            ]
+
+            let polygons = [
+                [0,1,3,2]
+            ]*/
+
+            /*let lines = [ [0,1] ];
+            let vertex = [
+                v(
+                    Math.cos(frame) * 2 + 0,
+                    10,
+                    Math.sin(frame) * 2 + 20
+                ),
+                v(
+                    Math.cos(frame) * 2 + 0,
+                    -10,
+                    Math.sin(frame) * 2 + 20
+                )
+            ];*/
+
+            function project (pt) { return v( focal_length/(pt.z-camera_pos.z)*(pt.x-camera_pos.x) , focal_length/(pt.z-camera_pos.z)*(pt.y-camera_pos.y) , pt.z) };
+            // function rotateAround (pt,around,axis,deltaAngle) {  };
+
+            function draw() {
+                
+                /*vertex = [
+                    v(
+                        Math.cos(frame/100) * 2 + 0,
+                        10,
+                        Math.sin(frame/100) * 2 + 20
+                    ),
+                    v(
+                        Math.cos(frame/100) * 2 + 0,
+                        -10,
+                        Math.sin(frame/100) * 2 + 20
+                    )
+                ]*/
+
+                g.clear();
+
+                let adjusted = vertex.map( // simulates camera yaw
+                    pt => pt.distanceTo(camera_pos)<_rd?v( 
+                        Math.cos( Math.atan2(pt.z-camera_pos.z, pt.x-camera_pos.x) + rty )*pt.mul(1,0,1).distanceTo(camera_pos.mul(1,0,1))+camera_pos.x, 
+                        pt.y, 
+                        Math.sin( Math.atan2(pt.z-camera_pos.z, pt.x-camera_pos.x) + rty )*pt.mul(1,0,1).distanceTo(camera_pos.mul(1,0,1))+camera_pos.z 
+                    ):pt
+                    // v( Math.cos(rty+Math.atan2(pt.z,pt.x))*pt.mul(1,0,1).distanceTo(camera_pos.mul(1,0,1)), pt.y, Math.sin(rty+Math.atan2(pt.z,pt.x))*pt.mul(1,0,1).distanceTo(camera_pos.mul(1,0,1)) )
+                    // v( Math.cos(rty)*(pt.x-camera_pos.x)+camera_pos.x, pt.y, Math.sin(rty)*(pt.z-camera_pos.z)+camera_pos.z )
+                ).map( // simulates camera pitch
+                    pt => pt.distanceTo(camera_pos)<_rd?v( 
+                        pt.x, 
+                        Math.cos( Math.atan2(pt.z-camera_pos.z, pt.y-camera_pos.y) + rtx )*pt.mul(0,1,1).distanceTo(camera_pos.mul(0,1,1))+camera_pos.y, 
+                        Math.sin( Math.atan2(pt.z-camera_pos.z, pt.y-camera_pos.y) + rtx )*pt.mul(0,1,1).distanceTo(camera_pos.mul(0,1,1))+camera_pos.z 
+                    ):pt
+                );
+
+                let points = adjusted.map( // projection calculation
+                    pt => pt.distanceTo(camera_pos)<_rd?project(pt):pt
+                ).map( // moves the points to be properly sized and centered on the screen
+                    pt => v(g.width/2+pt.x*500,g.height/2+pt.y*500,pt.z)
+                )
+
+                for (let poly of polygons.filter(poly=>poly.slice(1).every(p=>adjusted[p].z-camera_pos.z>0)&&poly.slice(1).some(p=>adjusted[p].distanceTo(camera_pos)<render_distance)).sort(
+                    (p0,p1) => Math.min(...p1.slice(1).map(p=>adjusted[p].distanceTo(camera_pos)))- Math.min(...p0.slice(1).map(p=>adjusted[p].distanceTo(camera_pos)))
+                )) {
+                    g.shape( poly.slice(1).map(p=>points[p]), poly[0] )
+                }
+
+                /*let i = 0;
+                for (let line of lines.filter(
+                    line => points[line[0]].z-(camera_pos.z) >0 ||
+                            points[line[1]].z-(camera_pos.z) >0
+                )) {
+                    let rp0 = adjusted[line[0]];
+                    let rp1 = adjusted[line[1]];
+
+                    let prev = rp0;
+
+                    let dist = rp0.distanceTo(rp1);
+                    let di = dist/10;
+                    let d = 0;
+
+                    // segments the line into smaller ones to get proper render
+
+                    while (d*di <= dist) {
+                        let rp = rp0.add(rp1.sub(rp0).unit().mul(d*di));
+
+                        let pp = project(prev);
+                        let pr = project(rp);
+
+                        let pa = v(g.width/2+pp.x*100,g.height/2+pp.y*100,pp.z);
+                        let pb = v(g.width/2+pr.x*100,g.height/2+pr.y*100,pr.z);
+
+                        if (
+                            pa.z-(camera_pos.z+focal_length) >0 ||
+                            pb.z-(camera_pos.z+focal_length) >0
+                        )
+                            g.line(
+                                pa,pb,
+                                10,
+                                'blue'
+                            );
+
+                        d += 1;
+                        prev = rp;
+                    }
+
+                    
+                    i++;
+                    
+                    //i = 0;
+                    //for (let pt of points.filter(
+                    //    pt => pt.z-(camera_pos.z+focal_length) >0
+                    //)) {
+                    //    g.circle(pt,5,'red');
+                    //    i++;
+                    //}
+                }*/
+            }
+            graphics.addDrawer(draw);
+
+            let pressed = {};
+            document.addEventListener("keydown",(event)=>{pressed[event.key] = true;});
+            document.addEventListener("keyup",(event)=>{delete pressed[event.key];});
+
+            document.addEventListener("mousemove", function(ev) {
+
+                rty += ev.movementX/150;
+                rtx += ev.movementY/120;
+
+                rtx = clamp(rtx, -1.5,1.5 );
+
+            },false);
+
+            function loop() {
+                graphics.udraw();
+
+                if (pressed['ArrowUp']) {
+                    camera_pos = camera_pos.add( v(Math.sin(rty),0,Math.cos(rty)).mul(.5) );
+                }
+                if (pressed['ArrowDown']) {
+                    camera_pos = camera_pos.add( v(Math.sin(rty),0,Math.cos(rty)).mul(-.5) );
+                }
+                if (pressed['ArrowLeft']) {
+                    camera_pos = camera_pos.add( v(Math.sin(rty+Math.PI/2),0,Math.cos(rty+Math.PI/2)).mul(-.5) );
+                }
+                if (pressed['ArrowRight']) {
+                    camera_pos = camera_pos.add( v(Math.sin(rty+Math.PI/2),0,Math.cos(rty+Math.PI/2)).mul(.5) );
+                }
+
+                frame++;
+            }
+            setInterval(loop);
+
+            
+
+            canvas.onclick = canvas.requestPointerLock;
+
+            canvas.requestPointerLock();
+
+        </script>
+
+        <script src="model.js"></script>
+        
+    </body>
+
+</html>
