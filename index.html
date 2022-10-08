@@ -607,16 +607,20 @@
             let choiceIndex = 0;
 
             let links = {
-                'Serial Communication test': 'https://github.com/ChickChicky/serial-com',
+                '3d Renderer': 'https://chickchicky.github.io/3D_renderer',
                 'TCCL IDE': 'https://chickchicky.github.io/tccl_IDE',
-                'Standing waves [numworks]': 'https://my.numworks.com/python/chick-chicky/wavez'
+                'Tetris for CC-Tweaked': 'https://github.com/ChickChicky/CC_Tetris',
+                'Virtual copmuter and processor': 'https://github.com/ChickChicky/nugget-computer',
+                'Huffman coding compressor': 'https://github.com/ChickChicky/JS_compressor',
+                'Serial Communication test': 'https://github.com/ChickChicky/serial-com',
+                'Standing waves (numworks.com)': 'https://numworks.com/python/chick-chicky/wavez'
             }
 
             addProgram('main',()=>{
                 CES.showTitle = true;
                 CES.clearAll();
                 vconsole.clear();
-                vconsole.print('please select a program to run:');
+                vconsole.print('Select a program to run:');
    let choice = vconsole.print(Object.keys(links).join('\n'));
                 vconsole.print('(use arrow keys)');
                 
@@ -652,7 +656,7 @@
                 });
 
                 waitFor(()=>done).then(()=>{
-                    window.location.href = Object.keys(links)[choiceIndex];
+                    window.location.href = Object.values(links)[choiceIndex];
                 });
             });
         </script>
