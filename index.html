@@ -605,12 +605,19 @@
 
         <script>
             let choiceIndex = 0;
+
+            let links = {
+                'Serial Communication test': 'https://github.com/ChickChicky/serial-com',
+                'TCCL IDE': 'https://chickchicky.github.io/tccl_IDE',
+                'Standing waves [numworks]': 'https://my.numworks.com/python/chick-chicky/wavez'
+            }
+
             addProgram('main',()=>{
                 CES.showTitle = true;
                 CES.clearAll();
                 vconsole.clear();
                 vconsole.print('please select a program to run:');
-   let choice = vconsole.print(Object.keys(progs).filter(c=>c!='main').join('\n'));
+   let choice = vconsole.print(Object.keys(links).join('\n'));
                 vconsole.print('(use arrow keys)');
                 
                 let press = false;
@@ -640,12 +647,12 @@
                         this.unsubmit();
                     }
 
-                    choiceIndex = mod(choiceIndex,Object.keys(progs).filter(c=>c!='main').length);
-                    choice.text = Object.keys(progs).filter(c=>c!='main').map(c=>prognames[c]).map((c,i)=>((choiceIndex==i)?'^[red]':'')+c+'^[reset]').join('\n')
+                    choiceIndex = mod(choiceIndex,Object.keys(links).length);
+                    choice.text = Object.keys(links).map((c,i)=>((choiceIndex==i)?'^[red]':'')+c+'^[reset]').join('\n')
                 });
 
                 waitFor(()=>done).then(()=>{
-                    runProgram(Object.keys(progs).filter(c=>c!='main')[choiceIndex]);
+                    window.location.href = Object.keys(links)[choiceIndex];
                 });
             });
         </script>
