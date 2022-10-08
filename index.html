@@ -652,7 +652,7 @@
                     }
 
                     choiceIndex = mod(choiceIndex,Object.keys(links).length);
-                    choice.text = Object.keys(links).map((c,i)=>((choiceIndex==i)?'^[red]':'')+c+'^[reset]').join('\n')
+                    choice.text = Object.keys(links).map((c,i)=>((choiceIndex==i)?'^[red]* ':'')+c+'^[reset]').join('\n')
                 });
 
                 waitFor(()=>done).then(()=>{
