@@ -1,0 +1,333 @@
+/* base rules */
+
+#top-bar {
+    max-width: 750px;
+
+    background-color: rgb(48, 49, 52);
+
+    margin-top:   5px;
+    margin-left:  5px;
+    margin-right: 5px;
+
+    padding: 5px;
+
+    border-radius: 10px;
+
+    display: flex;
+    align-items: stretch;
+    gap: 5px;
+}
+
+#hamburger-menu {
+    width:  40px;
+    height: 40px;
+    border-radius: 10px;
+    
+    background-color: rgb(40, 40, 47);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    justify-items: center;
+
+    transition-duration: 0.1s;
+    
+    cursor: pointer;
+}
+
+#hamburger-menu:hover {
+    background-color: rgb(30, 30, 37);
+    transition-duration: 0.1s;
+}
+
+#hamburger-menu:hover > * {
+    background-color: hsl(240, 10%, 30%);
+    width: 90%;
+    margin: 2px 0;
+    transition-duration: 0.1s;
+}
+
+#hamburger-menu > * {
+    width: 75%;
+    height: 3px;
+    border-radius: 100px;
+    background-color: hsl(240, 10%, 33%);
+    margin: 3px 0;
+    transition-duration: 0.1s;
+}
+
+#hamburger-menu-bar {
+    position: fixed;
+    height: 100%;
+    top: 0;
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
+    background-color: rgb(42, 42, 43);
+    display: block;
+    padding-left: 10px;
+    padding-right: 10px;
+    transition-duration: 0.5s;
+    display: flex;
+    flex-direction: column;
+}
+
+.open-menu {
+    left: 0;
+    transition-duration: 0.5s;
+}
+
+.close-menu {
+    left: calc( 0px - 100px - 20px );
+    transition-duration: 0.5s;
+}
+
+#hamburger-menu-bar h2 {
+    text-align: center;
+    color: hsl(240, 10%, 80%);
+    border-bottom: 1px solid rgb(90, 90, 90);
+    padding-bottom: 10px;
+    margin-bottom: 0;
+}
+
+.hamburger-menu-item {
+    color: hsl(240, 100%, 70%);
+    font-size: large;
+    margin-top: 30px;
+    padding: 2px;
+    text-decoration: none;
+    transition-duration: 0.1s;
+}
+
+.hamburger-menu-item:hover {
+    color: hsl(240, 100%, 75%);
+    background-color: rgb(30, 30, 31);
+    border-radius: 7px;
+    transition-duration: 0.1s;
+}
+
+.hmi-container {
+    margin-top: 5px;
+}
+
+#close-hamburger-menu {
+    width:  100%;
+    height: 15px;
+    text-align: center;
+    padding: 0;
+    border-radius: 10px;
+    border: 0;
+    align-self: center;
+    justify-self: center;
+    margin-top: 10px;
+    color: hsl(0, 20%, 50%);
+    background-color: rgb(30, 30, 31);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition-duration: 0.1s;
+    cursor: pointer;
+}
+
+#close-hamburger-menu:hover {
+    transition-duration: 0.1s;
+    background-color: hsl(0, 50%, 40%);
+}
+
+
+#medias {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    border-bottom: 1px solid rgb(90, 90, 90);
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+#medias a {
+    width:  auto;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#medias svg {
+    fill: hsl(236, 90%, 70%);
+    cursor: pointer;
+    transition: 0.1s;
+}
+
+#medias svg:hover {
+    width:  25px;
+    height: 25px;
+    transition: 0.1s;
+}
+
+#yt-link:hover {
+    fill: hsl(0, 80%, 50%);
+}
+
+#gh-link:hover {
+    fill: hsl(0, 0%, 80%);
+}
+
+body {
+    background-color: rgb(37, 37, 38);
+    margin: 0;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+/* index.html rules */
+
+#top-bar-text {
+    display: flex;
+    height: 40px;
+    width:  100%;
+    align-content: center;
+    justify-content: center;
+    color: hsl(240, 10%, 80%);
+}
+
+#top-bar-text h1 {
+    margin: 0;
+}
+
+#categories {
+    width: 100%;
+    max-width: 760px;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin: 5px;
+}
+
+#categories div {
+    padding: 5px;
+    background-color: rgb(48, 49, 52);
+    width:  fit-content;
+    height: fit-content;
+    border-radius: 10px;
+    color: hsl(240, 50%, 80%);
+}
+
+#body {
+    max-width: 740px;
+    margin: 5px;
+    padding: 10px;
+    background-color: hsl(240, 8%, 20%);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    color: hsl(240, 10%, 80%);
+}
+
+/* projects.html rules */
+
+#search-bar {
+    height: 40px;
+    width:  100%;
+    border-radius: 10px;
+
+    background-color: rgb(40, 40, 47);
+}
+
+#search-text {
+    width: calc(100% - 20px);
+    height: 40px;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: transparent;
+    border: 0;
+    outline: 0;
+    font-size: large;
+    color: rgb(212, 212, 227);
+}
+#search-text::selection {
+    background: hsl(240, 23%, 45%);
+}
+
+#projects {
+    width: 100%;
+    max-width: 770px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.project {
+    margin: 20px;
+    padding: 10px;
+    background-color: hsl(240, 8%, 20%);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+    transition-duration: 0.1s;
+}
+
+.hide-project {
+    display: none;
+    transition-duration: 0.1s;
+}
+
+.project h1 {
+    color: hsl(240, 10%, 90%);
+    margin: 0;
+    width: 100%;
+    font-size: x-large;
+    border-bottom: 2px solid rgb(90, 90, 90);
+    margin-bottom: 10px;
+}
+
+.project h1 a {
+    color: hsl(240, 10%, 90%);
+    text-decoration: none;
+    transition: 0.1s;
+}
+
+.project h1 a:hover {
+    color: hsl(240, 50%, 50%);
+    text-decoration: none;
+    transition: 0.1s;
+}
+
+.project p {
+    color: hsl(240, 5%, 80%);
+    margin-top: 10px; 
+    margin-bottom: 10px;
+    margin-left: 10px;
+    width: calc(100% - 110px);
+}
+
+.project p a {
+    color: hsl(240, 100%, 70%);
+    text-decoration: underline;
+    transition-duration: 0.1s;
+}
+
+.project p a:hover {
+    color: hsl(240, 100%, 75%);
+    background-color: rgb(30, 30, 31);
+    border-radius: 3px;
+    transition-duration: 0.1s;
+}
+
+.public {
+    border-bottom: 2px solid rgb(0, 128, 0) !important;
+    margin-bottom: 10px !important;
+}
+
+.private {
+    border-bottom: 2px solid rgb(150, 10, 10) !important;
+    margin-bottom: 10px !important;
+}
+
+.half-public {
+    border-bottom: 2px solid rgb(128, 128, 0) !important;
+    margin-bottom: 10px !important;
+}
