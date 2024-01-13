@@ -12,136 +12,113 @@
 
     <body>
         
-        <div id="top-bar">
-            <div id="hamburger-menu">
-                <div></div>
-                <div></div>
-                <div></div>
+        <div id="body-wrapper">
+        
+            <div id="top-bar">
+                <div id="hamburger-menu">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <div id="search-bar">
+                    <input type="text" id="search-text" placeholder="Search...">
+                </div>
             </div>
-            <div id="search-bar">
-                <input type="text" id="search-text" placeholder="Search...">
+
+            <nav id="hamburger-menu-bar" class="close-menu">
+                <div id="medias">
+                    <a href="https://www.youtube.com/@chickchicky3952">
+                        <svg id="yt-link" width="20" height="20" viewBox="0 0 16 16">
+                            <path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.007 2.007 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31.4 31.4 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A99.788 99.788 0 0 1 7.858 2h.193zM6.4 5.209v4.818l4.157-2.408L6.4 5.209z"></path>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/ChickChicky">
+                        <svg id="gh-link" width="20" height="20" viewBox="0 0 16 16">
+                            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="hmi-container"> <a class="hamburger-menu-item" href="/">Homepage</a>       </div>
+                <div class="hmi-container"> <a class="hamburger-menu-item" href="/projects">My Projects</a> </div>
+            </nav>
+
+            <div id="projects">
+                <article class="project">
+                    <h1 class="half-public"><a href="https://discord.com/oauth2/authorize?client_id=891396687329902602&scope=bot&permissions=8">Discord Bot</a></h1>
+                    <img src="https://cdn.discordapp.com/avatars/891396687329902602/0c7f25e827ccc21c232f34a6169bb377.png?size=256" width="100px">
+                    <p>
+                        I made several iterations of it, the first one was in Python but got abandonned because of <strong>JS POWER</strong>. I then made new stuff on a brand new bot in JavaScript. I plan on re-implementing some features of the old iterations back into this one, as well as adding some more random stuff that I feel worth integrating into this project.
+                    </p>
+                </article>
+                <article class="project">
+                    <h1 class="public"><a href="https://github.com/ChickChicky/EPU">EPU</a></h1>
+                    <p>
+                        A processor I designed in <a href="https://github.com/logisim-evolution/logisim-evolution">Logisim-Evolution</a> based on one I made in <a href="https://store.steampowered.com/app/387990/">Scrap Mechanic</a>, and another one I made in <a href="https://store.steampowered.com/app/1444480">Turing Complete</a>. It is turing complete, and it has access to a TTY screen, a keyboard and a pixel screen. I also made a simple compiler to write programs more easily.
+                        <br>
+                        <br>
+                        I'm also working on an emulator / debugger that I will also include in the project.
+                    </p>
+                </article>
+                <article class="project">
+                    <h1 class="public"><a href="https://github.com/ChickChicky/LLM">LLM</a></h1>
+                    <p>
+                        <strong>L</strong>ocal <strong>L</strong>ibrary <strong>M</strong>anager, a tool I made in JS to help my manage my local custom libraries across different porgramming languages. It has a basic console-based interface that uses <a href="">Nerd Fonts</a> glyphs, and it also accepts command-line arguments.
+                    </p>
+                </article>
+                <article class="project">
+                    <h1 class="public"><a href="https://chickchicky.github.io/3D_renderer">3D Renderer</a></h1>
+                    <img src="3d_renderer_icon.png" width="100px" height="100px">
+                    <p>
+                        This is a very basic 3D renderer in an HTML page made with JS.
+                        <br>
+                        It can render basic scenes, and... that's abut it 😅. It can't run very big scenes because it lacks of optimization, and it has weird gaps between faces.
+                        <br>
+                        But since this is my first time doing that kind of thing, I feel like it's not too bad.
+                    </p>
+                </article>
+                <article class="project">
+                    <h1 class="public"><a href="https://github.com/ChickChicky/rtx">Raytracing Renderer</a></h1>
+                    <img src="rtx_icon.png" width="100px" height="100px">
+                    <p>
+                        I thought I would give a try to raytracing, and it was really worth it, the final result is pretty good altho it lacks a bit of optimization. It can render basic scenes with a somewhat low resolution and quality relatively quickly. I still need to add a way of roatating shapes, and using custom models but for now it's enough for what it is.
+                    </p>
+                </article>
+                <article class="project">
+                    <h1 class="public">CES</h1>
+                    <p>
+                        Chickin Entertainment System, a web project that uses a canvas and JS to display stuff on the screen. <br>
+                        It supports basic I/O, but everything can be re-implemented, I just wrote some utilities to make creating scripts with it easier. <br>
+                        It also used to power my GitHub homepage.
+                        <br>
+                        <br>
+                        <strong>This project does not currently have its own repo</strong>
+                    </p>
+                </article>
+                <article class="project">
+                    <h1 class="public"><a href="https://github.com/ChickChicky/CC_Tetris">Tetris</a></h1>
+                    <img src="tetris_icon.png" width="100px" height="100px">
+                    <p>
+                        A tetris game I made that uses CC:Tweaked. Nothing really fancy about it, just a standard tetris game. It also supports online scoreboards and auto (sorta) updating.
+                    </p>
+                </article>
+                <article class="project">
+                    <h1 class="public"><a href="https://github.com/ChickChicky/nugget-computer">Nugget Computer</a></h1>
+                    <img src="nugget_computer_icon.png" width="100px" height="100px">
+                    <p>
+                        Another virtual computer I made, it can read a custom assembler, read user input and write to the screen. I really like how it turned out but it still has a few issues with reading from stdin. I gave it C-64 colors cuz they look awesome. I wanted to make some sort of BASIC interpreter but quickly abandonned due to the severe limitations of the language. Since I'm working on a new one, maybe I'll try to make a compiler for this computer ¯\_(ツ)_/¯.
+                    </p>
+                </article>
+                <article class="project">
+                    <h1 class="public"><a href="https://my.numworks.com/python/chick-chicky/wavez">Standing Waves</a></h1>
+                    <img src="standing_waves_icon.png" width="100px" height="100px">
+                    <p>
+                        I recently got a Numworks calculator and I watched a <a href="https://www.youtube.com/watch?v=rjueHI002Fg">video of Steve Mould</a>, and I like messing around with functions, so that really got me inspired. It allows to see the anti-nodes of a 2D standing wave. Of course I didn't stop here, and I made another mode to see the nodes themselves and a mode that combines both. I wanted to run this much faster and with a better resolution, and turned it into a trippy effect that I added to my bot (<span style="background-color: rgba(0,0,0,0.3); font-family: 'Courier New', Courier, monospace;">$trip</span>).
+                    </p>
+                </article>
             </div>
+
         </div>
-
-        <div id="projects">
-            <article class="project">
-                <h1 class="half-public"><a href="https://discord.com/oauth2/authorize?client_id=891396687329902602&scope=bot&permissions=8">Discord Bot</a></h1>
-                <img src="https://cdn.discordapp.com/avatars/891396687329902602/0c7f25e827ccc21c232f34a6169bb377.png?size=256" width="100px">
-                <p>
-                    I made several iterations of it, the first one was in Python but got abandonned because of <strong>JS POWER</strong>. I then made new stuff on a brand new bot in JavaScript. I plan on re-implementing some features of the old iterations back into this one, as well as adding some more random stuff that I feel worth integrating into this project.
-                </p>
-            </article>
-            <article class="project">
-                <h1 class="public"><a href="https://github.com/ChickChicky/EPU">EPU</a></h1>
-                <p>
-                    A processor I designed in <a href="https://github.com/logisim-evolution/logisim-evolution">Logisim-Evolution</a> based on one I made in <a href="https://store.steampowered.com/app/387990/">Scrap Mechanic</a>, and another one I made in <a href="https://store.steampowered.com/app/1444480">Turing Complete</a>. It is turing complete, and it has access to a TTY screen, a keyboard and a pixel screen. I also made a simple compiler to write programs more easily.
-                    <br>
-                    <br>
-                    I'm also working on an emulator / debugger that I will also include in the project.
-                </p>
-            </article>
-            <article class="project">
-                <h1 class="public"><a href="https://github.com/ChickChicky/LLM">LLM</a></h1>
-                <p>
-                    <strong>L</strong>ocal <strong>L</strong>ibrary <strong>M</strong>anager, a tool I made in JS to help my manage my local custom libraries across different porgramming languages. It has a basic console-based interface that uses <a href="">Nerd Fonts</a> glyphs, and it also accepts command-line arguments.
-                </p>
-            </article>
-            <article class="project">
-                <h1 class="public"><a href="https://chickchicky.github.io/3D_renderer">3D Renderer</a></h1>
-                <img src="3d_renderer_icon.png" width="100px" height="100px">
-                <p>
-                    This is a very basic 3D renderer in an HTML page made with JS.
-                    <br>
-                    It can render basic scenes, and... that's abut it 😅. It can't run very big scenes because it lacks of optimization, and it has weird gaps between faces.
-                    <br>
-                    But since this is my first time doing that kind of thing, I feel like it's not too bad.
-                </p>
-            </article>
-            <article class="project">
-                <h1 class="public"><a href="https://github.com/ChickChicky/rtx">Raytracing Renderer</a></h1>
-                <img src="rtx_icon.png" width="100px" height="100px">
-                <p>
-                    I thought I would give a try to raytracing, and it was really worth it, the final result is pretty good altho it lacks a bit of optimization. It can render basic scenes with a somewhat low resolution and quality relatively quickly. I still need to add a way of roatating shapes, and using custom models but for now it's enough for what it is.
-                </p>
-            </article>
-            <article class="project">
-                <h1 class="public">CES</h1>
-                <p>
-                    Chickin Entertainment System, a web project that uses a canvas and JS to display stuff on the screen. <br>
-                    It supports basic I/O, but everything can be re-implemented, I just wrote some utilities to make creating scripts with it easier. <br>
-                    It also used to power my GitHub homepage.
-                    <br>
-                    <br>
-                    <strong>This project does not currently have its own repo</strong>
-                </p>
-            </article>
-            <article class="project">
-                <h1 class="public"><a href="https://github.com/ChickChicky/CC_Tetris">Tetris</a></h1>
-                <img src="tetris_icon.png" width="100px" height="100px">
-                <p>
-                    A tetris game I made that uses CC:Tweaked. Nothing really fancy about it, just a standard tetris game. It also supports online scoreboards and auto (sorta) updating.
-                </p>
-            </article>
-            <!-- I have abandonned TCCL and I am now starting to work on NuggetScript, a much better-built language -->
-            <!--<article class="project">
-                <h1 class="public"><a href="https://chickchicky.github.io/tccl_IDE">TCCL IDE</a></h1>
-                <p>
-                    I made a programming language and was a bit too lazy to create a VSCode extension, so I made my own IDE.
-                    <br>
-                    It supports basic suggestion (not autocompletion) based on what you are doing to give the best results. 
-                    <br>
-                    I am working on improving the editor, and once this update is done, I will finish making NS (Nugget Script), a new more powerful language, and I will reuse the bases of this project to create another IDE for it.
-                </p>
-            </article>
-            <article class="project">
-                <h1 class="private"><a href="https://chickchicky.github.io/tccl_IDE">TCCL interpreter</a></h1>
-                <p>
-                    I made an interpreter for TCCL in Python, but it was too slow so I started making one in JS. This project is kinda abandonned but I will finish it for the IDE and then move on to my new language.
-                </p>
-            </article>-->
-            <article class="project">
-                <h1 class="public"><a href="https://github.com/ChickChicky/nugget-computer">Nugget Computer</a></h1>
-                <img src="nugget_computer_icon.png" width="100px" height="100px">
-                <p>
-                    Another virtual computer I made, it can read a custom assembler, read user input and write to the screen. I really like how it turned out but it still has a few issues with reading from stdin. I gave it C-64 colors cuz they look awesome. I wanted to make some sort of BASIC interpreter but quickly abandonned due to the severe limitations of the language. Since I'm working on a new one, maybe I'll try to make a compiler for this computer ¯\_(ツ)_/¯.
-                </p>
-            </article>
-            <article class="project">
-                <h1 class="public"><a href="https://my.numworks.com/python/chick-chicky/wavez">Standing Waves</a></h1>
-                <img src="standing_waves_icon.png" width="100px" height="100px">
-                <p>
-                    I recently got a Numworks calculator and I watched a <a href="https://www.youtube.com/watch?v=rjueHI002Fg">video of Steve Mould</a>, and I like messing around with functions, so that really got me inspired. It allows to see the anti-nodes of a 2D standing wave. Of course I didn't stop here, and I made another mode to see the nodes themselves and a mode that combines both. I wanted to run this much faster and with a better resolution, and turned it into a trippy effect that I added to my bot (<span style="background-color: rgba(0,0,0,0.3); font-family: 'Courier New', Courier, monospace;">$trip</span>).
-                </p>
-            </article>
-            <article class="project">
-                <h1 class="private">ForceAttack</h1>
-                <p>
-                    A Roblox FPS game I'm making with a friend. An alpha version might be released this year.
-                </p>
-            </article>
-        </div>
-
-        <nav id="hamburger-menu-bar" class="close-menu">
-            <div id="close-hamburger-menu">Close</div>
-
-            <h2> Menu </h2>
-
-            <div id="medias">
-                <a href="https://www.youtube.com/@chickchicky3952">
-                    <svg id="yt-link" width="20" height="20" viewBox="0 0 16 16">
-                        <path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.007 2.007 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31.4 31.4 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A99.788 99.788 0 0 1 7.858 2h.193zM6.4 5.209v4.818l4.157-2.408L6.4 5.209z"></path>
-                    </svg>
-                </a>
-                <a href="https://github.com/ChickChicky">
-                    <svg id="gh-link" width="20" height="20" viewBox="0 0 16 16">
-                        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
-                    </svg>
-                </a>
-            </div>
-
-            <div class="hmi-container"> <a class="hamburger-menu-item" href="/">Homepage</a>       </div>
-            <div class="hmi-container"> <a class="hamburger-menu-item" href="/projects">My Projects</a> </div>
-        </nav>
 
         <canvas id="background"></canvas>
         <script>
