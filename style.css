@@ -209,6 +209,10 @@ background: hsl(240, 12%, 50%);
     height: 100%;
 }
 
+#body-wrapper {
+    width: 800px;
+}
+
 /* index.html rules */
 
 #top-bar-text {
