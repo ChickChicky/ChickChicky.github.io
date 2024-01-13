@@ -1,7 +1,7 @@
 /* base rules */
 
 #top-bar {
-    max-width: 750px;
+    width: 100%;
 
     background-color: rgb(48, 49, 52);
 
@@ -68,6 +68,7 @@
 }
 
 .open-menu {
+    margin-top: 20px;
     transform:scaleY(1);
     height: 100px;
     transition-duration: 0.5s;
@@ -75,6 +76,7 @@
 
 .close-menu {
     transform:scaleY(0);
+    margin-top: s0px;
     height: 0;
     transition-duration: 0.5s;
 }
@@ -185,7 +187,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-background: hsl(240, 8%, 20%); 
+    background: hsl(240, 8%, 20%); 
 }
 
 ::-webkit-scrollbar-thumb {
@@ -194,7 +196,7 @@ background: hsl(240, 8%, 20%);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-background: hsl(240, 12%, 50%);
+    background: hsl(240, 12%, 50%);
 }
 
 #background {
@@ -211,6 +213,9 @@ background: hsl(240, 12%, 50%);
 
 #body-wrapper {
     width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* index.html rules */
