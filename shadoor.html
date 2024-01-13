@@ -6,8 +6,7 @@
     <body style="margin: 0; border: 0; padding:0; width: 100%; height: 100%">
         <canvas style="margin:0; padding:0; position:absolute; top:0; left:0"></canvas>
         <script>
-            // Modifies the resolution of the background, higher values mean more sharp render, as well as less GPU stress
-            const RESOLUTION = 1000;
+            let scale =  1;
             ;(async()=>{
                 let fragSource = await (await fetch('background.frag')).text();
                 let vertSource = await (await fetch('background.vert')).text();
@@ -15,7 +14,6 @@
                 const canvas = document.querySelector('canvas');
                 
                 const gl = canvas.getContext('webgl2');
-                gl.enable(gl.DEPTH_TEST);
 
                 const frag = gl.createShader(gl.FRAGMENT_SHADER);
                 gl.shaderSource(frag,fragSource);
@@ -32,16 +30,22 @@
                 gl.useProgram(prog);
 
                 const vertices = new Float32Array([
-                    0, 0, 
-                    1, 0, 
-                    0, 1, 
-                    
-                    1, 0, 
-                    0, 1, 
-                    1, 1
+                    -1, -1,
+                     1, -1,
+                    -1,  1,
+                     1,  1,
                 ]);
 
+                const vertexBuffer = gl.createBuffer();
+                gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
+                gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
+
+                const positionAttribLocation = gl.getAttribLocation(prog, 'a_position');
+                gl.vertexAttribPointer(positionAttribLocation, 2, gl.FLOAT, false, 0, 0);
+                gl.enableVertexAttribArray(positionAttribLocation);
+
                 let f = 0;
+                let prev = -Infinity;
 
                 (function frame() { f++;
                     //canvas.width = window.innerWidth;
@@ -49,12 +53,17 @@
                     gl.viewport(0,0,canvas.width,canvas.height);
                     gl.uniform2f(gl.getUniformLocation(prog,'u_resolution'),canvas.width,canvas.height);
                     gl.uniform1f(gl.getUniformLocation(prog,'u_time'),(Date.now()/1000)%(Math.PI*1000));
-                    gl.drawArrays(gl.POINTS, 0, 1);
+                    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+                    let dt = Date.now()-prev;
+                    if (dt > 30)
+                        scale /= 1.2; else
+                        scale *= 1.1;
+                    scale = Math.max(0,Math.min(1,scale));
+                    prev = Date.now();
                     requestAnimationFrame(frame);
                 })();
 
                 setInterval(()=>{
-                    let scale = Math.max(window.innerWidth,window.innerHeight)/RESOLUTION;
                     canvas.width = window.innerWidth/scale;
                     canvas.height = window.innerHeight/scale;
                     canvas.style.width = `${window.innerWidth}px`;
