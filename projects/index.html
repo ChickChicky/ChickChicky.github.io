@@ -143,6 +143,84 @@
             <div class="hmi-container"> <a class="hamburger-menu-item" href="/projects">My Projects</a> </div>
         </nav>
 
+        <canvas id="background"></canvas>
+        <script>
+            let scale =  1;
+            ;(async()=>{
+
+                const canvas = document.querySelector('#background');
+                
+                const gl = canvas.getContext('webgl2');
+
+                let fragSource = await (await fetch('background.frag')).text();
+                let vertSource = await (await fetch('background.vert')).text();
+
+                if (!fragSource || !vertSource) return;
+
+                const frag = gl.createShader(gl.FRAGMENT_SHADER);
+                gl.shaderSource(frag,fragSource);
+                gl.compileShader(frag);
+                
+                const vert = gl.createShader(gl.VERTEX_SHADER);
+                gl.shaderSource(vert,vertSource);
+                gl.compileShader(vert);
+
+                const prog = gl.createProgram();
+                gl.attachShader(prog, frag);
+                gl.attachShader(prog, vert);
+                gl.linkProgram(prog);
+                gl.useProgram(prog);
+
+                if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
+                    console.error(gl.getProgramInfoLog(prog));
+                    gl.deleteProgram(prog);
+                    return;
+                }
+
+                const vertices = new Float32Array([
+                    -1, -1,
+                     1, -1,
+                    -1,  1,
+                     1,  1,
+                ]);
+
+                const vertexBuffer = gl.createBuffer();
+                gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
+                gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
+
+                const positionAttribLocation = gl.getAttribLocation(prog, 'a_position');
+                gl.vertexAttribPointer(positionAttribLocation, 2, gl.FLOAT, false, 0, 0);
+                gl.enableVertexAttribArray(positionAttribLocation);
+
+                let f = 0;
+                let prev = -Infinity;
+
+                // RENDERER
+                (function frame() { f++;
+                    gl.viewport(0,0,canvas.width,canvas.height);
+                    gl.uniform2f(gl.getUniformLocation(prog,'u_resolution'),canvas.width,canvas.height);
+                    gl.uniform1f(gl.getUniformLocation(prog,'u_time'),(Date.now()/1000)%(Math.PI*1000));
+                    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+                    
+                    let dt = Date.now()-prev;
+                    prev = Date.now();
+                    if (dt > 40)
+                        scale -= .05; else
+                        scale += .01;
+                    scale = Math.max(0.01,Math.min(1,scale));
+                    
+                    requestAnimationFrame(frame);
+                })();
+
+                // CANVAS SIZE UPDATE
+                setInterval(()=>{
+                    canvas.width = window.innerWidth*scale;
+                    canvas.height = window.innerHeight*scale;
+                },50);
+                
+            })();
+        </script>
+
     </body>
 
 </html>
