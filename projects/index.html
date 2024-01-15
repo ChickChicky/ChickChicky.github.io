@@ -124,10 +124,10 @@
         <script>
             let scale =  1;
             ;(async()=>{
-
-                const canvas = document.querySelector('#background');
+                /**@type {HTMLCanvasElement}*/
+                const canvas = document.querySelector('canvas[id="background"]');
                 
-                const gl = canvas.getContext('webgl2');
+                const gl = canvas.getContext('webgl2') || canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
 
                 let fragSource = await (await fetch('background.frag')).text();
                 let vertSource = await (await fetch('background.vert')).text();
@@ -174,6 +174,8 @@
 
                 // RENDERER
                 (function frame() { f++;
+                    gl.clearColor(0,0,0,1);
+                    gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);
                     gl.viewport(0,0,canvas.width,canvas.height);
                     gl.uniform2f(gl.getUniformLocation(prog,'u_resolution'),canvas.width,canvas.height);
                     gl.uniform1f(gl.getUniformLocation(prog,'u_time'),(Date.now()/1000)%(Math.PI*1000));
